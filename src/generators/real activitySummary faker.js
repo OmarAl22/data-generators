@@ -1,10 +1,12 @@
- 
 
  let faker = require("faker");
  const converter = require("json-2-csv");
  var sync  = true;
+  import {getFakeNumber} from "../utils/helper"
+  import {getJSON} from "../utils/helper"
+  import {getCSV} from "../utils/helper"
+
  
-  
  for (var i = 0; i < 30; i++) {
    let date = faker.date.past();
    let date_end = new Date(date.getTime());
@@ -54,27 +56,6 @@
 else
  getCSV(record1);
 
- function getFakeNumber(a, b) {
-   return faker.datatype.number({ min: a, max: b });
- }
-
- function getJSON(obj){
-    
-   let json =  JSON.stringify(obj);
-   console.log(json);
-    
- }
-
-
- function getCSV(obj){
-   var csv = converter.json2csv(obj, (err, csv) => {
-     if (err) {
-      // throw err;
-     } 
-     console.log(csv);
-   }); 
-  
-
  
  }
 
@@ -114,7 +95,7 @@ function getRandomClass_5min(){
   return beats.toString();
 } 
 
- }
+ 
 
 
 
