@@ -1,12 +1,48 @@
 
- let faker = require("faker");
- const converter = require("json-2-csv");
- var sync  = true;
-  //  import {getFakeNumber} from "../utils/helper"
-  //  import {getJSON} from "../utils/helper"
-  // import {getCSV} from "../utils/helper"
-  //var {getFakeNumber, getJSON, getCSV} = require('../utils/helper.js');
- 
+let faker = require("faker");
+const { parse } = require("json2csv");
+const fields = [
+  "summary_date ",
+  "timezone ",
+  "day_start ",
+  "day_end ",
+  "cal_active ",
+  "cal_total ",
+  "class_5min ",
+  "steps ",
+  "daily_movement ",
+  "non_wear ",
+  "rest ",
+  "inactive ",
+  "low ",
+  "medium ",
+  "high ",
+  "inactivity_alerts ",
+  "average_met ",
+  "met_1min ",
+  "met_min_inactive ",
+  "met_min_low ",
+  "met_min_medium ",
+  "met_min_high ",
+  "target_calories ",
+  "target_km ",
+  "target_miles ",
+  "to_target_km ",
+  "to_target_miles ",
+  "score ",
+  "score_meet_daily_targets ",
+  "score_move_every_hour ",
+  "score_recovery_time ",
+  "score_stay_active ",
+  "score_training_frequency ",
+  "score_training_volume ",
+  "rest_mode_state ",
+  "total ",
+  "user ",
+  "day",
+];
+const opts = { fields };
+var sync = true; 
  for (var i = 0; i < 30; i++) {
    let date = faker.date.past();
    let date_end = new Date(date.getTime());
@@ -50,38 +86,30 @@
        rest_mode_state:getFakeNumber(0, 4),
    };
    
-  
-   if(sync) 
- getJSON(record1);
-else
- getCSV(record1);
+   console.log(record1);
 
- 
- }
+     if (sync) getJSON(record1);
+   else getCSV(record1);
+  }
 
 
-    function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-};
+  function getFakeNumber(a, b) {
+    return faker.datatype.number({ min: a, max: b });
+  }
 
-  function getJSON(obj){
-  
-  let json =  JSON.stringify(obj);
-  console.log(json);
-   
-};
+  function getJSON(obj) {
+    let json = JSON.stringify(obj);
+    console.log(json);
+  }
 
-
-   function getCSV(obj){
-    let json =  JSON.stringify(obj);
-  var csv = converter.json2csv(json, (err, csv) => {
-    if (err) {
-      throw err;
-    } 
-     console.log(csv);
-  })
-}
-
+  function getCSV(obj) {
+    try {
+      const csv = parse(record1, opts);
+      console.log(csv);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
  function getRandom1Min(){
  
@@ -118,9 +146,3 @@ function getRandomClass_5min(){
   //console.log(beats);
   return beats.toString();
 } 
-
- 
-
-
-
- 

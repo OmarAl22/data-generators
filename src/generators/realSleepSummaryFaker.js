@@ -1,9 +1,8 @@
-
- let faker = require("faker");
- const converter = require("json-2-csv");
- var sync  = false;
-
- 
+let faker = require("faker");
+const { parse } = require("json2csv");
+const fields = ["summary_date","period_id","is_longest","timezone","bedtime_end","bedtime_start","breath_average","duration","total","awake","rem","deep","light","midpoint_time","efficiency","restless","onset_latency","hr_5min","hypnogram_5min","rmssd","rmssd_5min","score","score_alignment","score_deep","score_disturbances","score_efficiency","score_latency","score_rem","score_total","temperature_deviation","temperature_trend_deviation","bedtime_start_delta","bedtime_end_delta","midpoint_at_delta","temperature_delta","hr_lowest","hr_average","user","day"];
+const opts = { fields };
+var sync = true; 
   for (var i = 0; i < 30; i++) {
     let date = faker.date.past();
     let date_end = new Date(date.getTime());
@@ -48,34 +47,29 @@
       rmssd_5min:getRandomHeartBeats(10),
     };
     
-   
-    if(sync) 
-    getJSON(record1);
- else
-    getCSV(record1);
+    console.log(record1);
+    if (sync) getJSON(record1);
+    else getCSV(record1);
+   }
  
  
-    function getFakeNumber(a, b) {
-      return faker.datatype.number({ min: a, max: b });
-    };
-    
-      function getJSON(obj){
-      
-      let json =  JSON.stringify(obj);
-      console.log(json);
-       
-    };
-    
-    
-       function getCSV(obj){
-        let json =  JSON.stringify(obj);
-      var csv = converter.json2csv(json, (err, csv) => {
-        if (err) {
-          throw err;
-        } 
-         console.log(csv);
-      })
-    }
+   function getFakeNumber(a, b) {
+     return faker.datatype.number({ min: a, max: b });
+   }
+ 
+   function getJSON(obj) {
+     let json = JSON.stringify(obj);
+     console.log(json);
+   }
+ 
+   function getCSV(obj) {
+     try {
+       const csv = parse(record1, opts);
+       console.log(csv);
+     } catch (err) {
+       console.error(err);
+     }
+   }
 
 
   function getRandomHeartBeats(change){
@@ -109,7 +103,7 @@
    return beats.toString();
  } 
  
-  }
+   
 
 
 
