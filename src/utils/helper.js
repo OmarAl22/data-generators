@@ -1,13 +1,18 @@
-export function getFakeNumber(a, b) {
+
+/*
+ let faker = require("faker");
+ const converter = require("json-2-csv");
+
+ export  function getFakeNumber(a, b) {
     return faker.datatype.number({ min: a, max: b });
-  }
+  };
  
   export function getJSON(obj){
     
     let json =  JSON.stringify(obj);
     console.log(json);
      
-  }
+  };
  
  
   export  function getCSV(obj){
@@ -16,8 +21,5 @@ export function getFakeNumber(a, b) {
         throw err;
       } 
        console.log(csv);
-    }); 
-   
- 
-  
-  }
+    })
+  }; */
