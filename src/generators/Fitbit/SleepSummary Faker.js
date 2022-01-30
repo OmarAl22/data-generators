@@ -1,9 +1,10 @@
+let csvjson  = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
   const fields = [
     "activityscore","activitycalories","caloriesbmr","caloriesout","distances","elevation","fairlyactiveminutes","floors","heartratezones","lightlyactiveminutes","marginalcalories","restingheartrate","sedentaryminutes","steps","veryactiveminutes","user","day"];
 const opts = { fields };
-var sync = true; 
+var sync = false; 
 var array = [];
 
 for (let i = 0; i < 1; i++) {
@@ -73,12 +74,17 @@ for (let i = 0; i < 1; i++) {
 
   function getCSV(obj) {
     try {
+      const csvData = csvjson.toCSV(obj, {
+        headers: fields
+    });
       const csv = parse(obj, opts);
-      console.log(csv);
+      console.log(csvData);
     } catch (err) {
       console.error(err);
     }
   }
+
+  
 
 
 }
