@@ -1,13 +1,12 @@
 let faker = require("faker");
 const { parse } = require("json2csv");
- let activity = ["soccer","basketball","tennis","baseball","golf","running","volleyball","badminton","swimming","boxing","table tennis","skiing","ice skating","roller skating","cricket","rugby","pool","darts","football","bowling","ice hockey","surfing","karate","horse racing","snowboarding","skateboarding","cycling","archery","fishing","gymnastics","figure skating","rock climbing","sumo wrestling","taekwondo","fencing","water skiing","jet skiing","weight lifting","scuba diving","judo","wind surfing","kickboxing","sky diving","hang gliding","bungee jumping"];
- const fields = [
+  const fields = [
     "activityscore","activitycalories","caloriesbmr","caloriesout","distances","elevation","fairlyactiveminutes","floors","heartratezones","lightlyactiveminutes","marginalcalories","restingheartrate","sedentaryminutes","steps","veryactiveminutes","user","day"];
 const opts = { fields };
 var sync = true; 
+var array = [];
 
-
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 1; i++) {
   let date = faker.date.past();
   let date_end = new Date(date.getTime());
   date_end.setHours(date.getHours() + 24);

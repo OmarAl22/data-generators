@@ -1,3 +1,4 @@
+let csvjson  = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
 let activity = ["soccer","basketball","tennis","baseball","golf","running","volleyball","badminton","swimming","boxing","table tennis","skiing","ice skating","roller skating","cricket","rugby","pool","darts","football","bowling","ice hockey","surfing","karate","horse racing","snowboarding","skateboarding","cycling","archery","fishing","gymnastics","figure skating","rock climbing","sumo wrestling","taekwondo","fencing","water skiing","jet skiing","weight lifting","scuba diving","judo","wind surfing","kickboxing","sky diving","hang gliding","bungee jumping"];
@@ -5,10 +6,10 @@ let activity = ["soccer","basketball","tennis","baseball","golf","running","voll
     "activeduration","activezoneminutes","activitylevel","activityname","activitytypeid","averageheartrate","calories","calorieslink","duration","elevationgain","hasactivezoneminutes","heartratelink","heartratezones","lastmodified","logid","logtype","manualvaluesspecified","originalduration","originalstarttime","starttime","tcxlink","distance","distanceunit","pace","source","speed","steps","user","day","period"
 ];
 const opts = { fields };
-var sync = true; 
+var sync = false; 
+var array = [];
 
-
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 1; i++) {
   let date = faker.date.past();
   let date_end = new Date(date.getTime());
    date_end.setHours(date.getHours() + 24);
@@ -114,12 +115,14 @@ for (let i = 0; i < 30; i++) {
 
   function getCSV(obj) {
     try {
+      const csvData = csvjson.toCSV(obj, {
+        headers: fields
+    });
       const csv = parse(obj, opts);
-      console.log(csv);
+      console.log(csvData);
     } catch (err) {
       console.error(err);
     }
   }
-
 
 }
