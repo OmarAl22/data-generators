@@ -1,6 +1,5 @@
 let csvjson = require("csvjson");
 let faker = require("faker");
-const { parse } = require("json2csv");
 let activity = ["deep", "light", "rem", "wake"];
 const fields = [
   "activityscore",
@@ -25,40 +24,32 @@ const opts = { fields };
 var sync = true;
 
 if (sync) {
-  console.log("p_timestamp,p_datetime,p_value,p_level");
+  console.log("p_date,p_time,p_value");
 } else {
-  console.log("p_timestamp,p_datetime,p_value,p_level,user,day");
+  console.log("p_date,p_time,p_value,user,day");
 }
 
 let p_timestamp = getFakeNumber(0, 10000000000);
 let date = faker.date.past();
 let id_hash = faker.random.alphaNumeric(36);
-
 for (let i = 0; i < 10; i++) {
   date.setHours(date.getHours() + getFakeNumber(0, 2));
   date.setMinutes(date.getMinutes() + getFakeNumber(0, 10));
 
   p_timestamp = p_timestamp + getFakeNumber(0, 10000);
-  let p_datetime = date;
-  let p_value = getFakeNumber(0, 30);
+
   let p_level = activity[getFakeNumber(0, 3)];
   let day = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
+  let hours =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  let p_value = getFakeNumber(0, 100);
 
   if (sync) {
-    console.log(p_timestamp + "," + p_datetime + "," + p_value + "," + p_level);
+    console.log(day + "," + hours + "," + p_value);
   } else {
+    //  console.log(  "p_date,p_time,p_value,user,day"     );
     console.log(
-      p_timestamp +
-        "," +
-        p_datetime +
-        "," +
-        p_value +
-        "," +
-        p_level +
-        ",ID_" +
-        id_hash +
-        "," +
-        day
+      day + "," + hours + "," + p_value + "," + "ID_" + id_hash + "," + day
     );
   }
 }
