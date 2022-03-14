@@ -109,12 +109,14 @@ for (let i = 0; i < 1; i++) {
     console.log(json);
   }
 
+  
   function getCSV(obj) {
+    let json = JSON.stringify(obj);
     try {
-      const csvData = csvjson.toCSV(obj, {
-        headers: fields
-    });
-      const csv = parse(obj, opts);
+       const csvData = csvjson.toCSV(json, {
+        headers: fields,
+      });
+      const csv = parse(json, opts);
       console.log(csvData);
     } catch (err) {
       console.error(err);

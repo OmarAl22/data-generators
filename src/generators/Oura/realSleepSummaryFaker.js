@@ -101,10 +101,15 @@ function getJSON(obj) {
   console.log(json);
 }
 
+
 function getCSV(obj) {
+  let json = JSON.stringify(obj);
   try {
-    const csv = parse(record1, opts);
-    console.log(csv);
+     const csvData = csvjson.toCSV(json, {
+      headers: fields,
+    });
+    const csv = parse(json, opts);
+    console.log(csvData);
   } catch (err) {
     console.error(err);
   }

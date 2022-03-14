@@ -1,6 +1,7 @@
-
+let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
+
 const fields = [
   "summary_date ",
   "timezone ",
@@ -43,7 +44,7 @@ const fields = [
 ];
 const opts = { fields };
 var sync = true; 
- for (var i = 0; i < 30; i++) {
+ for (var i = 0; i < 1; i++) {
    let date = faker.date.past();
    let date_end = new Date(date.getTime());
    date_end.setHours(date.getHours() + 24);
@@ -103,14 +104,17 @@ var sync = true;
   }
 
   function getCSV(obj) {
+    let json = JSON.stringify(obj);
     try {
-      const csv = parse(record1, opts);
-      console.log(csv);
+       const csvData = csvjson.toCSV(json, {
+        headers: fields,
+      });
+      const csv = parse(json, opts);
+      console.log(csvData);
     } catch (err) {
       console.error(err);
     }
   }
-
  function getRandom1Min(){
  
   let start  = getFakeNumber(0,9)/10.0;
