@@ -1,7 +1,11 @@
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
-
+let level = [
+    "low",
+    "medium",
+    "high"
+];
 let activity = [
   "soccer",
   "basketball",
@@ -50,8 +54,7 @@ let activity = [
   "bungee jumping",
 ];
 const fields = [
-  "summaryid","calendardate","activitytype","activekilocalories","bmrkilocalories","steps","distanceinmeters","durationinseconds","activetimeinseconds","starttimeinseconds","starttimeoffsetinseconds","moderateintensitydurationinseconds","vigorousintensitydurationinseconds","floorsclimbed","stepsgoal","intensitydurationgoalinseconds","floorsclimbedgoal","averagestresslevel","stressqualifier","minheartrateinbeatsperminute","maxheartrateinbeatsperminute","averageheartrateinbeatsperminute","restingheartrateinbeatsperminute","timeoffsetheartratesamples","maxstresslevel","stressdurationinseconds","reststressdurationinseconds","activitystressdurationinseconds","lowstressdurationinseconds","mediumstressdurationinseconds","highstressdurationinseconds","user","day","period",
-];
+    "summaryid","activitytype","activekilocalories","steps","distanceinmeters","durationinseconds","activetimeinseconds","starttimeinseconds","starttimeoffsetinseconds","met","intensity","meanmotionintensity","maxmotionintensity","user","day","period"];
 const opts = { fields };
 var sync = false;
 
@@ -68,38 +71,19 @@ for (let i = 0; i < 1; i++) {
 
   let summary = {
     summaryid: makeid(15),
-    calendardate: date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(),
-    activityName: activity[getFakeNumber(0, 30)],
+     activitytype: activity[getFakeNumber(0, 30)],
     activekilocalories: getFakeNumber(0, 1000),
-    bmrkilocalories: getFakeNumber(0, 120),
     steps: getFakeNumber(0, 6000),
     distanceinmeters:getFakeNumber(0, 10000),
     durationinseconds: getFakeNumber(0, 10000),
     activetimeinseconds: getFakeNumber(0, 10000),
     starttimeinseconds: getFakeNumber(0, 10000),
     starttimeoffsetinseconds: getFakeNumber(0, 1000),
-    moderateintensitydurationinseconds: getFakeNumber(0, 1000),
-    vigorousintensitydurationinseconds: getFakeNumber(0, 1000),
-    floorsclimbed:getFakeNumber(0, 20),
-    stepsgoal: getFakeNumber(0, 10000),
-    intensitydurationgoalinseconds: getFakeNumber(0, 10000),
-    floorsclimbedgoal:getFakeNumber(0, 20),
-    averagestresslevel: getFakeNumber(0, 20),
-    stressqualifier:getFakeNumber(0, 20),
-    minheartrateinbeatsperminute: getFakeNumber(0, 20),
-    maxheartrateinbeatsperminute: getFakeNumber(0, 20),
-    averageheartrateinbeatsperminute:getFakeNumber(0, 20),
-    restingheartrateinbeatsperminute: getFakeNumber(0, 20) + '{',
-    timeoffsetheartratesamples: getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20) + "," +  getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20),
-    ' ': "}",
-    maxstresslevel: getFakeNumber(0, 20),
-    stressdurationinseconds: getFakeNumber(0, 20),
-    reststressdurationinseconds: getFakeNumber(0, 20),
-    activitystressdurationinseconds: getFakeNumber(0, 20),
-    lowstressdurationinseconds:getFakeNumber(0, 20),
-    mediumstressdurationinseconds: getFakeNumber(0, 20),
-    highstressdurationinseconds: getFakeNumber(0, 20),
-    user: "id_"+makeid(20),
+    met: getFakeNumber(0, 1000),
+    intensity: level[getFakeNumber(0, 3)],
+    maxmotionintensity: getFakeNumber(0, 10000),
+    meanmotionintensity:getFakeNumber(0, 20),
+    ser: "id_"+makeid(20),
     day: date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(),
     period: getFakeNumber(0, 20),
   
