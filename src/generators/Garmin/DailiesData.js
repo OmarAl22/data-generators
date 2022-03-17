@@ -90,7 +90,7 @@ for (let i = 0; i < 1; i++) {
     maxheartrateinbeatsperminute: getFakeNumber(0, 20),
     averageheartrateinbeatsperminute:getFakeNumber(0, 20),
     restingheartrateinbeatsperminute: getFakeNumber(0, 20) + '{',
-    timeoffsetheartratesamples: getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20) + "," +  getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20),
+    timeoffsetheartratesamples: getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20) +  ' . '  +  getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20),
     ' ': "}",
     maxstresslevel: getFakeNumber(0, 20),
     stressdurationinseconds: getFakeNumber(0, 20),
