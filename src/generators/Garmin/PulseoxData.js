@@ -84,7 +84,7 @@ for (let i = 0; i < 1; i++) {
 
   };
 
-\
+
   if (sync) getJSON(summary);
  else getCSV(summary);
 
