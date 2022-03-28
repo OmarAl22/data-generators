@@ -10,35 +10,25 @@ for (let i = 0; i < 1; i++) {
   let date_end = new Date(date.getTime());
   date_end.setHours(date.getHours() + 24);
 
-  let activity = {
-    date:
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
-    timezone: "Europe/Paris",
+  let series = {
+   
     deviceid: makeid(30),
-    hash_deviceid: makeid(30),
-    brand: getFakeNumber(0, 40),
-    is_tracker: true,
-    steps: getFakeNumber(0, 10000),
+    model: "Pulse",
+    model_id:  getFakeNumber(0, 10),
+     steps: getFakeNumber(0, 10000),
+    
+    elevation: getFakeNumber(0, 10000),
+    calories: getFakeNumber(0, 10000),
     distance: getFakeNumber(0, 10000),
-    elevation: getFakeNumber(0, 20),
-    soft: getFakeNumber(0, 10000),
-    moderate: getFakeNumber(0, 10000),
-    intense: getFakeNumber(0, 10000),
-    active: getFakeNumber(0, 10000),
-    calories: getFakeNumber(0, 5000),
-    totalcalories: getFakeNumber(0, 5000),
-    hr_average: getFakeNumber(0, 120),
-    hr_min: getFakeNumber(0, 80),
-    hr_max: getFakeNumber(80, 120),
-    hr_zone_0: getFakeNumber(0, 5000),
-    hr_zone_1: getFakeNumber(0, 5000),
-    hr_zone_2: getFakeNumber(0, 5000),
-    hr_zone_3: getFakeNumber(0, 5000),
+    stroke: getFakeNumber(0, 10000),
+    pool_lap: getFakeNumber(0, 10000),
+    duration: getFakeNumber(0, 10000),
+    heart_rate: getFakeNumber(0, 100),
+    spo2_auto: getFakeNumber(0, 10000)
   };
   let body = {
-    activities: [activity, activity, activity],
-    more: true,
-    offset: 0,
+    series: [series, series, series],
+   
   };
 
   let summary = {
@@ -46,11 +36,11 @@ for (let i = 0; i < 1; i++) {
     body: body,
   };
 
-  array.push(summary);
+if (sync) getJSON(summary);
+else getCSV(summary);
 }
 
-if (sync) getJSON(array);
-else getCSV(array);
+
 
 function getFakeNumber(a, b) {
   return faker.datatype.number({ min: a, max: b });
