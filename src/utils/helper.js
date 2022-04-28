@@ -1,25 +1,36 @@
+let csvjson  = require("csvjson");
+const { parse } = require("json2csv");
+let faker = require("faker");
+function getFakeNumber(a, b) {
+  return faker.datatype.number({ min: a, max: b });
+}
 
-/*
- let faker = require("faker");
- const converter = require("json-2-csv");
+function getJSON(obj) {
+  let json = JSON.stringify(obj);
+  console.log(json);
+}
 
- export  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
-  };
- 
-  export function getJSON(obj){
-    
-    let json =  JSON.stringify(obj);
-    console.log(json);
-     
-  };
- 
- 
-  export  function getCSV(obj){
-    var csv = converter.json2csv(json, (err, csv) => {
-      if (err) {
-        throw err;
-      } 
-       console.log(csv);
-    })
-  }; */
+
+function getCSV(obj) {
+  let json = JSON.stringify(obj);
+  try {
+     const csvData = csvjson.toCSV(json, {
+      headers: fields,
+    });
+    const csv = parse(json, opts);
+    console.log(csvData);
+  } catch (err) {
+    console.error(err);
+  }
+}
+function makeid(length) {
+  var result           = '';
+  var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789-';
+  var charactersLength = characters.length;
+  for ( var i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * 
+charactersLength));
+ }
+ return result;
+}
+module.exports = {getJSON,getCSV,getFakeNumber,makeid}

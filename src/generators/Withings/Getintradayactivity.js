@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -12,19 +17,19 @@ for (let i = 0; i < 1; i++) {
 
   let series = {
    
-    deviceid: makeid(30),
+    deviceid: helper.makeid(30),
     model: "Pulse",
-    model_id:  getFakeNumber(0, 10),
-     steps: getFakeNumber(0, 10000),
+    model_id:  helper.getFakeNumber(0, 10),
+     steps: helper.getFakeNumber(0, 10000),
     
-    elevation: getFakeNumber(0, 10000),
-    calories: getFakeNumber(0, 10000),
-    distance: getFakeNumber(0, 10000),
-    stroke: getFakeNumber(0, 10000),
-    pool_lap: getFakeNumber(0, 10000),
-    duration: getFakeNumber(0, 10000),
-    heart_rate: getFakeNumber(0, 100),
-    spo2_auto: getFakeNumber(0, 10000)
+    elevation: helper.getFakeNumber(0, 10000),
+    calories: helper.getFakeNumber(0, 10000),
+    distance: helper.getFakeNumber(0, 10000),
+    stroke: helper.getFakeNumber(0, 10000),
+    pool_lap: helper.getFakeNumber(0, 10000),
+    duration: helper.getFakeNumber(0, 10000),
+    heart_rate: helper.getFakeNumber(0, 100),
+    spo2_auto: helper.getFakeNumber(0, 10000)
   };
   let body = {
     series: [series, series, series],
@@ -36,40 +41,8 @@ for (let i = 0; i < 1; i++) {
     body: body,
   };
 
-if (sync) getJSON(summary);
-else getCSV(summary);
+if (sync) helper.getJSON(summary);
+else helper.getCSV(summary);
 }
-
-
-
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
-
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-    const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function makeid(length) {
-  var result = "";
-  var characters = "abcdefghijklmnopqrstuvwxyz0123456789-";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+ 
+ 

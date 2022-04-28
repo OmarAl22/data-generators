@@ -1,4 +1,8 @@
-let csvjson = require("csvjson");
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
 
@@ -11,11 +15,11 @@ for (let i = 0; i < 1; i++) {
   date_end.setHours(date.getHours() + 24);
 
   let activity = {
-    startdate:getFakeNumber(1000,1000000),
-    enddate: getFakeNumber(1000,1000000),
-    state: getFakeNumber(0,7),
-    model: getFakeNumber(0,7),
-    model_id:getFakeNumber(0,7),
+    startdate:helper.getFakeNumber(1000,1000000),
+    enddate: helper.getFakeNumber(1000,1000000),
+    state: helper.getFakeNumber(0,7),
+    model: helper.getFakeNumber(0,7),
+    model_id:helper.getFakeNumber(0,7),
  
   };
   let body = {
@@ -31,37 +35,7 @@ for (let i = 0; i < 1; i++) {
   array.push(summary);
 }
 
-if (sync) getJSON(array);
-else getCSV(array);
+if (sync) helper.getJSON(array);
+else helper.getCSV(array);
 
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
-
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-    const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function makeid(length) {
-  var result = "";
-  var characters = "abcdefghijklmnopqrstuvwxyz0123456789-";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+ 

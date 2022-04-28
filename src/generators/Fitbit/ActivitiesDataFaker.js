@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -90,9 +95,9 @@ for (let i = 0; i < 1; i++) {
   date_end.setHours(date.getHours() + 24);
 
   let minuteMultiplierItem = {
-    minuteMultiplier: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    order: getFakeNumber(0, 100),
+    minuteMultiplier: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    order: helper.getFakeNumber(0, 100),
     type: "Name",
     zoneName: "Name",
   };
@@ -103,23 +108,23 @@ for (let i = 0; i < 1; i++) {
       minuteMultiplierItem,
       minuteMultiplierItem,
     ],
-    totalMinutes: getFakeNumber(0, 100),
+    totalMinutes: helper.getFakeNumber(0, 100),
   };
 
   const activityLevelItem = {
-    minutes: getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
     name: "sedentary",
   };
 
   let distance = {
     activity: "text",
-    distance: getFakeNumber(0, 100),
+    distance: helper.getFakeNumber(0, 100),
   };
   let heartRateZone = {
-    caloriesOut: getFakeNumber(0, 100),
-    max: getFakeNumber(0, 100),
-    min: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
+    caloriesOut: helper.getFakeNumber(0, 100),
+    max: helper.getFakeNumber(0, 100),
+    min: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
     name: "text",
   };
 
@@ -130,7 +135,7 @@ for (let i = 0; i < 1; i++) {
   };
 
   let summary = {
-    activeDuration: getFakeNumber(0, 10000000),
+    activeDuration: helper.getFakeNumber(0, 10000000),
 
     activeZoneMinutes: [
       activeZoneMinutesItem,
@@ -144,13 +149,13 @@ for (let i = 0; i < 1; i++) {
       activityLevelItem,
       activityLevelItem,
     ],
-    activityName: activity[getFakeNumber(0, 30)],
-    activityTypeId: getFakeNumber(0, 100000),
-    averageHeartRate: getFakeNumber(0, 200),
-    calories: getFakeNumber(0, 1000),
+    activityName: activity[helper.getFakeNumber(0, 30)],
+    activityTypeId: helper.getFakeNumber(0, 100000),
+    averageHeartRate: helper.getFakeNumber(0, 200),
+    calories: helper.getFakeNumber(0, 1000),
     caloriesLink: "http",
-    duration: getFakeNumber(0, 10000000),
-    elevationGain: getFakeNumber(0, 1000),
+    duration: helper.getFakeNumber(0, 10000000),
+    elevationGain: helper.getFakeNumber(0, 1000),
     hasActiveZoneMinutes: "true",
 
     heartRateZones: [heartRateZone, heartRateZone, heartRateZone],
@@ -160,39 +165,18 @@ for (let i = 0; i < 1; i++) {
     heartRateZones: [heartRateZone, heartRateZone, heartRateZone],
 
     lastModified: date,
-    logId: getFakeNumber(0, 10000000000000),
+    logId: helper.getFakeNumber(0, 10000000000000),
     logType: "auto_detected",
     manualValuesSpecified: manualValuesSpecifiedItem,
-    originalDuration: getFakeNumber(0, 10000000),
+    originalDuration: helper.getFakeNumber(0, 10000000),
     originalStartTime: faker.date.past(),
     startTime: faker.date.past(),
-    steps: getFakeNumber(0, 100000),
+    steps: helper.getFakeNumber(0, 100000),
     tcxLink: "http",
   };
 
-  if (sync) getJSON(summary);
-  else getCSV(summary);
+  if (sync) helper.getJSON(summary);
+  else helper.getCSV(summary);
 
-  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
-  }
-
-  function getJSON(obj) {
-    let json = JSON.stringify(obj);
-    console.log(json);
-  }
-
- 
-  function getCSV(obj) {
-    let json = JSON.stringify(obj);
-    try {
-       const csvData = csvjson.toCSV(json, {
-        headers: fields,
-      });
-      const csv = parse(json, opts);
-      console.log(csvData);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+   
 }

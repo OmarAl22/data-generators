@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -30,24 +35,24 @@ for (let i = 0; i < 1; i++) {
   date_end.setHours(date.getHours() + 24);
 
   let deep = {
-    count: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    thirtyDayAvgMinutes: getFakeNumber(0, 100),
+    count: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    thirtyDayAvgMinutes: helper.getFakeNumber(0, 100),
   };
   let light = {
-    count: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    thirtyDayAvgMinutes: getFakeNumber(0, 100),
+    count: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    thirtyDayAvgMinutes: helper.getFakeNumber(0, 100),
   };
   let rem = {
-    count: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    thirtyDayAvgMinutes: getFakeNumber(0, 100),
+    count: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    thirtyDayAvgMinutes: helper.getFakeNumber(0, 100),
   };
   let wake = {
-    count: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    thirtyDayAvgMinutes: getFakeNumber(0, 100),
+    count: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    thirtyDayAvgMinutes: helper.getFakeNumber(0, 100),
   };
 
   let summary = {
@@ -55,42 +60,22 @@ for (let i = 0; i < 1; i++) {
     light: light,
     rem: rem,
     wake: wake,
-    activeScore: getFakeNumber(-1, 5),
+    activeScore: helper.getFakeNumber(-1, 5),
 
-    startTimeTS: getFakeNumber(0, 10000000000),
-    endTimeTS: getFakeNumber(0, 10000000000),
+    startTimeTS: helper.getFakeNumber(0, 10000000000),
+    endTimeTS: helper.getFakeNumber(0, 10000000000),
     startTime: date,
     endTime: date_end,
-    minutesAfterWakeup: getFakeNumber(0, 100),
-    minutesAsleep: getFakeNumber(0, 100),
-    minutesAwake: getFakeNumber(0, 100),
-    minutesToFallAsleep: getFakeNumber(0, 100),
-    timeInBed: getFakeNumber(0, 1000),
+    minutesAfterWakeup: helper.getFakeNumber(0, 100),
+    minutesAsleep: helper.getFakeNumber(0, 100),
+    minutesAwake: helper.getFakeNumber(0, 100),
+    minutesToFallAsleep: helper.getFakeNumber(0, 100),
+    timeInBed: helper.getFakeNumber(0, 1000),
   };
 
-  if (sync) getJSON(summary);
-  else getCSV(summary);
+  if (sync) helper.getJSON(summary);
+  else helper.getCSV(summary);
 
-  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
-  }
-
-  function getJSON(obj) {
-    let json = JSON.stringify(obj);
-    console.log(json);
-  }
-
-
-  function getCSV(obj) {
-    let json = JSON.stringify(obj);
-    try {
-       const csvData = csvjson.toCSV(json, {
-        headers: fields,
-      });
-      const csv = parse(json, opts);
-      console.log(csvData);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+   
+   
 }

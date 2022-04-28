@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let faker = require("faker");
 const { parse } = require("json2csv");
 const fields = [
@@ -52,35 +57,35 @@ for (var i = 0; i < 30; i++) {
       date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(),
     summary_date:
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
-    period_id: getFakeNumber(0, 100),
+    period_id: helper.getFakeNumber(0, 100),
     is_longest: 1,
-    timezone: getFakeNumber(-11, 11) * 60,
+    timezone: helper.getFakeNumber(-11, 11) * 60,
     bedtime_start: date.toISOString(),
     bedtime_end: date_end.toISOString(),
 
-    score: getFakeNumber(0, 100),
-    score_total: getFakeNumber(0, 100),
-    score_disturbances: getFakeNumber(0, 100),
-    score_efficiency: getFakeNumber(0, 100),
-    score_latency: getFakeNumber(0, 100),
-    score_rem: getFakeNumber(0, 100),
-    score_deep: getFakeNumber(0, 100),
-    score_alignment: getFakeNumber(0, 100),
-    total: getFakeNumber(0, 86400),
-    duration: getFakeNumber(0, 86400),
-    awake: getFakeNumber(0, 86400),
-    light: getFakeNumber(0, 86400),
-    rem: getFakeNumber(0, 86400),
-    deep: getFakeNumber(0, 86400),
-    onset_latency: getFakeNumber(0, 100),
-    restless: getFakeNumber(0, 100),
-    efficiency: getFakeNumber(0, 100),
-    midpoint_time: getFakeNumber(0, 86400),
-    hr_lowest: getFakeNumber(0, 150),
-    hr_average: getFakeNumber(0, 150),
-    rmssd: getFakeNumber(0, 100),
-    breath_average: getFakeNumber(0, 100),
-    temperature_delta: getFakeNumber(0, 100),
+    score: helper.getFakeNumber(0, 100),
+    score_total: helper.getFakeNumber(0, 100),
+    score_disturbances: helper.getFakeNumber(0, 100),
+    score_efficiency: helper.getFakeNumber(0, 100),
+    score_latency: helper.getFakeNumber(0, 100),
+    score_rem: helper.getFakeNumber(0, 100),
+    score_deep: helper.getFakeNumber(0, 100),
+    score_alignment: helper.getFakeNumber(0, 100),
+    total: helper.getFakeNumber(0, 86400),
+    duration: helper.getFakeNumber(0, 86400),
+    awake: helper.getFakeNumber(0, 86400),
+    light: helper.getFakeNumber(0, 86400),
+    rem: helper.getFakeNumber(0, 86400),
+    deep: helper.getFakeNumber(0, 86400),
+    onset_latency: helper.getFakeNumber(0, 100),
+    restless: helper.getFakeNumber(0, 100),
+    efficiency: helper.getFakeNumber(0, 100),
+    midpoint_time: helper.getFakeNumber(0, 86400),
+    hr_lowest: helper.getFakeNumber(0, 150),
+    hr_average: helper.getFakeNumber(0, 150),
+    rmssd: helper.getFakeNumber(0, 100),
+    breath_average: helper.getFakeNumber(0, 100),
+    temperature_delta: helper.getFakeNumber(0, 100),
 
     hypnogram_5min: getRandomHypnogram(),
     hr_5min: getRandomHeartBeats(3),
@@ -88,39 +93,19 @@ for (var i = 0; i < 30; i++) {
   };
 
   console.log(record1);
-  if (sync) getJSON(record1);
-  else getCSV(record1);
+  if (sync) helper.getJSON(record1);
+  else helper.getCSV(record1);
 }
 
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
-
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-     const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
+ 
+ 
 
 function getRandomHeartBeats(change) {
-  let length = getFakeNumber(50, 150);
-  let start = getFakeNumber(50, 120);
+  let length = helper.getFakeNumber(50, 150);
+  let start = helper.getFakeNumber(50, 120);
   let beats = new Array();
   for (var i = 0; i < length; i++) {
-    beats[i] = start + getFakeNumber(-1 * change, change);
+    beats[i] = start + helper.getFakeNumber(-1 * change, change);
     start = beats[i];
   }
   // console.log(beats);
@@ -128,11 +113,11 @@ function getRandomHeartBeats(change) {
 }
 
 function getRandomHypnogram() {
-  let length = getFakeNumber(50, 150);
+  let length = helper.getFakeNumber(50, 150);
   let start = 1;
   let beats = new Array();
   for (var i = 0; i < length; i++) {
-    let temp = start + getFakeNumber(-1, 1);
+    let temp = start + helper.getFakeNumber(-1, 1);
     if (temp < 1) temp = 1;
     else if (temp > 4) temp = 4;
     beats[i] = temp;

@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -12,43 +17,43 @@ for (let i = 0; i < 1; i++) {
 
 
   let data = {
-    apnea_hypopnea_index: getFakeNumber(0,1000000),
-    asleepduration: getFakeNumber(0,1000000),
-    breathing_disturbances_intensity: getFakeNumber(0,100),
-    deepsleepduration: getFakeNumber(0,1000000),
-    durationtosleep: getFakeNumber(0,1000000),
-    durationtowakeup: getFakeNumber(0,1000000),
-    hr_average: getFakeNumber(70,80),
-    hr_max: getFakeNumber(80,100),
-    hr_min: getFakeNumber(60,70),
-    lightsleepduration: getFakeNumber(0,1000000),
-    nb_rem_episodes: getFakeNumber(0,10),
+    apnea_hypopnea_index: helper.getFakeNumber(0,1000000),
+    asleepduration: helper.getFakeNumber(0,1000000),
+    breathing_disturbances_intensity: helper.getFakeNumber(0,100),
+    deepsleepduration: helper.getFakeNumber(0,1000000),
+    durationtosleep: helper.getFakeNumber(0,1000000),
+    durationtowakeup: helper.getFakeNumber(0,1000000),
+    hr_average: helper.getFakeNumber(70,80),
+    hr_max: helper.getFakeNumber(80,100),
+    hr_min: helper.getFakeNumber(60,70),
+    lightsleepduration: helper.getFakeNumber(0,1000000),
+    nb_rem_episodes: helper.getFakeNumber(0,10),
     night_events: Array.from({length: 10}, () => Math.floor(Math.random() * 10)),
-    out_of_bed_count: getFakeNumber(0,10),
-    remsleepduration: getFakeNumber(0,1000000),
-    rr_average: getFakeNumber(0,10),
-    rr_max: getFakeNumber(0,10),
-    rr_min: getFakeNumber(0,10),
-    sleep_efficiency: getFakeNumber(0,10),
-    sleep_latency: getFakeNumber(0,10),
-    sleep_score:getFakeNumber(0,10),
-    snoring: getFakeNumber(0,10),
-    snoringepisodecount: getFakeNumber(0,10),
-    total_sleep_time: getFakeNumber(0,1000000),
-    total_timeinbed: getFakeNumber(0,1000000),
+    out_of_bed_count: helper.getFakeNumber(0,10),
+    remsleepduration: helper.getFakeNumber(0,1000000),
+    rr_average: helper.getFakeNumber(0,10),
+    rr_max: helper.getFakeNumber(0,10),
+    rr_min: helper.getFakeNumber(0,10),
+    sleep_efficiency: helper.getFakeNumber(0,10),
+    sleep_latency: helper.getFakeNumber(0,10),
+    sleep_score:helper.getFakeNumber(0,10),
+    snoring: helper.getFakeNumber(0,10),
+    snoringepisodecount: helper.getFakeNumber(0,10),
+    total_sleep_time: helper.getFakeNumber(0,1000000),
+    total_timeinbed: helper.getFakeNumber(0,1000000),
     wakeup_latency: 0,
-    wakeupcount:getFakeNumber(0,10),
-    wakeupduration: getFakeNumber(0,1000000),
+    wakeupcount:helper.getFakeNumber(0,10),
+    wakeupduration: helper.getFakeNumber(0,1000000),
     waso: 0
   };
 
 
   let activity = {
     timezone: "Europe/Paris",
-    model:getFakeNumber(0,10),
-    model_id:getFakeNumber(0,10),
-    startdate:getFakeNumber(1000,1000000),
-    enddate: getFakeNumber(1000,1000000),
+    model:helper.getFakeNumber(0,10),
+    model_id:helper.getFakeNumber(0,10),
+    startdate:helper.getFakeNumber(1000,1000000),
+    enddate: helper.getFakeNumber(1000,1000000),
     
 
 
@@ -71,37 +76,8 @@ for (let i = 0; i < 1; i++) {
   array.push(summary);
 }
 
-if (sync) getJSON(array);
-else getCSV(array);
+if (sync) helper.getJSON(array);
+else helper.getCSV(array);
 
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
-
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-    const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function makeid(length) {
-  var result = "";
-  var characters = "abcdefghijklmnopqrstuvwxyz0123456789-";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+ 
+ 

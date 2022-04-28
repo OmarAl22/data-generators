@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 let activity = ["deep", "light", "rem", "wake"];
@@ -29,20 +34,20 @@ if (sync) {
   console.log("p_date,p_time,p_value,user,day");
 }
 
-let p_timestamp = getFakeNumber(0, 10000000000);
+let p_timestamp = helper.getFakeNumber(0, 10000000000);
 let date = faker.date.past();
 let id_hash = faker.random.alphaNumeric(36);
 for (let i = 0; i < 10; i++) {
-  date.setHours(date.getHours() + getFakeNumber(0, 2));
-  date.setMinutes(date.getMinutes() + getFakeNumber(0, 10));
+  date.setHours(date.getHours() + helper.getFakeNumber(0, 2));
+  date.setMinutes(date.getMinutes() + helper.getFakeNumber(0, 10));
 
-  p_timestamp = p_timestamp + getFakeNumber(0, 10000);
+  p_timestamp = p_timestamp + helper.getFakeNumber(0, 10000);
 
-  let p_level = activity[getFakeNumber(0, 3)];
+  let p_level = activity[helper.getFakeNumber(0, 3)];
   let day = date.getFullYear() + "-" + date.getMonth() + "-" + date.getDay();
   let hours =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-  let p_value = getFakeNumber(0, 100);
+  let p_value = helper.getFakeNumber(0, 100);
 
   if (sync) {
     console.log(day + "," + hours + "," + p_value);
@@ -54,6 +59,4 @@ for (let i = 0; i < 10; i++) {
   }
 }
 
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
+ 

@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -13,39 +18,39 @@ for (let i = 0; i < 1; i++) {
 
   let data = {
 
-algo_pause_duration: getFakeNumber(0, 1000000),
-calories:  getFakeNumber(0, 5000),
-distance:  getFakeNumber(0, 5000),
-elevation: getFakeNumber(0, 50),
-hr_average: getFakeNumber(0, 80),
-hr_max: getFakeNumber(0, 100),
-hr_min: getFakeNumber(0, 60),
-hr_zone_0: getFakeNumber(0, 100),
-hr_zone_1: getFakeNumber(0, 100),
-hr_zone_2: getFakeNumber(0, 100),
-hr_zone_3: getFakeNumber(0, 100),
-intensity:getFakeNumber(0, 100),
-manual_calories: getFakeNumber(0, 2000),
-manual_distance: getFakeNumber(0, 2000),
-pause_duration:getFakeNumber(0, 2000),
-pool_laps: getFakeNumber(0, 20),
-pool_length: getFakeNumber(0, 2000),
-spo2_average: getFakeNumber(0, 2000),
-steps:getFakeNumber(0, 20000),
-strokes: getFakeNumber(0, 2000),
+algo_pause_duration: helper.getFakeNumber(0, 1000000),
+calories:  helper.getFakeNumber(0, 5000),
+distance:  helper.getFakeNumber(0, 5000),
+elevation: helper.getFakeNumber(0, 50),
+hr_average: helper.getFakeNumber(0, 80),
+hr_max: helper.getFakeNumber(0, 100),
+hr_min: helper.getFakeNumber(0, 60),
+hr_zone_0: helper.getFakeNumber(0, 100),
+hr_zone_1: helper.getFakeNumber(0, 100),
+hr_zone_2: helper.getFakeNumber(0, 100),
+hr_zone_3: helper.getFakeNumber(0, 100),
+intensity:helper.getFakeNumber(0, 100),
+manual_calories: helper.getFakeNumber(0, 2000),
+manual_distance: helper.getFakeNumber(0, 2000),
+pause_duration:helper.getFakeNumber(0, 2000),
+pool_laps: helper.getFakeNumber(0, 20),
+pool_length: helper.getFakeNumber(0, 2000),
+spo2_average: helper.getFakeNumber(0, 2000),
+steps:helper.getFakeNumber(0, 20000),
+strokes: helper.getFakeNumber(0, 2000),
 
   }
   let series = {
 
-    category:  getFakeNumber(0, 40),
+    category:  helper.getFakeNumber(0, 40),
     timezone: "Europe/Paris",
-    model: getFakeNumber(0, 40),
-    attrib: getFakeNumber(0, 40),
-    startdate: getFakeNumber(0, 2000000),
-    enddate: getFakeNumber(0, 2000000),
+    model: helper.getFakeNumber(0, 40),
+    attrib: helper.getFakeNumber(0, 40),
+    startdate: helper.getFakeNumber(0, 2000000),
+    enddate: helper.getFakeNumber(0, 2000000),
     date: date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(),
-    modified: getFakeNumber(0, 2000000),
-    deviceid: makeid(30),
+    modified: helper.getFakeNumber(0, 2000000),
+    deviceid: helper.makeid(30),
     data: data,
   };
   let body = {
@@ -59,39 +64,7 @@ strokes: getFakeNumber(0, 2000),
     body: body,
   };
 
-  if (sync) getJSON(summary);
-  else getCSV(summary);
+  if (sync) helper.getJSON(summary);
+  else helper.getCSV(summary);
   }
-
-
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
-
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-    const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function makeid(length) {
-  var result = "";
-  var characters = "abcdefghijklmnopqrstuvwxyz0123456789-";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+ 

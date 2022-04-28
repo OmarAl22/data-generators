@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -56,71 +61,51 @@ var sync = true;
        
    day_start: date.toISOString(),
    day_end: date_end.toISOString(),
-       timezone: (getFakeNumber(-11,11)*60) ,
+       timezone: (helper.getFakeNumber(-11,11)*60) ,
      
-       score: getFakeNumber(0, 100),
-       score_stay_active: getFakeNumber(0, 100),
-       score_move_every_hour: getFakeNumber(0, 100),
-       score_meet_daily_targets: getFakeNumber(0, 100),
-       score_training_frequency: getFakeNumber(0, 100),
-       score_training_volume: getFakeNumber(0, 100),
-       score_recovery_time: getFakeNumber(0, 100),
-       daily_movement: getFakeNumber(0, 10000),
-       non_wear: getFakeNumber(0, 1440),
-       rest: getFakeNumber(0, 1440),
-       inactive: getFakeNumber(0, 1440),
-       inactivity_alerts: getFakeNumber(0, 1440),
-       low: getFakeNumber(0, 1440),
-       medium: getFakeNumber(0, 1440),
-       high: getFakeNumber(0, 1440),
-       steps: getFakeNumber(0, 20000),
-       cal_total: getFakeNumber(0, 7000),
-       cal_active: getFakeNumber(0, 7000),
-       met_min_inactive: getFakeNumber(0, 1440),
-       met_min_low: getFakeNumber(0, 1440),
-       met_min_medium_plus: getFakeNumber(0, 1440),
-       met_min_medium: getFakeNumber(0, 1440),
-       met_min_high: getFakeNumber(0, 1440),
-       average_met: getFakeNumber(0, 1440),
+       score: helper.getFakeNumber(0, 100),
+       score_stay_active: helper.getFakeNumber(0, 100),
+       score_move_every_hour: helper.getFakeNumber(0, 100),
+       score_meet_daily_targets: helper.getFakeNumber(0, 100),
+       score_training_frequency: helper.getFakeNumber(0, 100),
+       score_training_volume: helper.getFakeNumber(0, 100),
+       score_recovery_time: helper.getFakeNumber(0, 100),
+       daily_movement: helper.getFakeNumber(0, 10000),
+       non_wear: helper.getFakeNumber(0, 1440),
+       rest: helper.getFakeNumber(0, 1440),
+       inactive: helper.getFakeNumber(0, 1440),
+       inactivity_alerts: helper.getFakeNumber(0, 1440),
+       low: helper.getFakeNumber(0, 1440),
+       medium: helper.getFakeNumber(0, 1440),
+       high: helper.getFakeNumber(0, 1440),
+       steps: helper.getFakeNumber(0, 20000),
+       cal_total: helper.getFakeNumber(0, 7000),
+       cal_active: helper.getFakeNumber(0, 7000),
+       met_min_inactive: helper.getFakeNumber(0, 1440),
+       met_min_low: helper.getFakeNumber(0, 1440),
+       met_min_medium_plus: helper.getFakeNumber(0, 1440),
+       met_min_medium: helper.getFakeNumber(0, 1440),
+       met_min_high: helper.getFakeNumber(0, 1440),
+       average_met: helper.getFakeNumber(0, 1440),
        class_5min: getRandomClass_5min(),
        calss_1min:getRandom1Min(),
-       rest_mode_state:getFakeNumber(0, 4),
+       rest_mode_state:helper.getFakeNumber(0, 4),
    };
    
    console.log(record1);
 
-     if (sync) getJSON(record1);
-   else getCSV(record1);
+     if (sync) helper.getJSON(record1);
+   else helper.getCSV(record1);
   }
 
 
-  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
-  }
-
-  function getJSON(obj) {
-    let json = JSON.stringify(obj);
-    console.log(json);
-  }
-
-  function getCSV(obj) {
-    let json = JSON.stringify(obj);
-    try {
-       const csvData = csvjson.toCSV(json, {
-        headers: fields,
-      });
-      const csv = parse(json, opts);
-      console.log(csvData);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  
  function getRandom1Min(){
  
-  let start  = getFakeNumber(0,9)/10.0;
+  let start  = helper.getFakeNumber(0,9)/10.0;
   let beats = new Array(); 
   for (var i = 0; i < 1440; i++) {
-    let temp = (getFakeNumber(-1,1) + start  + (getFakeNumber(0,9)/10.0));
+    let temp = (helper.getFakeNumber(-1,1) + start  + (helper.getFakeNumber(0,9)/10.0));
     if (temp < 0)
     temp = 0 ;
     else if (temp > 4)
@@ -138,7 +123,7 @@ function getRandomClass_5min(){
   let start  = 1
   let beats = new Array(); 
   for (var i = 0; i < 288; i++) {
-    let temp = start  + getFakeNumber(-1,1);
+    let temp = start  + helper.getFakeNumber(-1,1);
     if (temp < 0)
     temp = 0 ;
     else if (temp > 4)

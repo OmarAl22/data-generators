@@ -1,5 +1,11 @@
-let csvjson  = require("csvjson");
 let faker = require("faker");
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
+
+
 const { parse } = require("json2csv");
  let activity = ["soccer","basketball","tennis","baseball","golf","running","volleyball","badminton","swimming","boxing","table tennis","skiing","ice skating","roller skating","cricket","rugby","pool","darts","football","bowling","ice hockey","surfing","karate","horse racing","snowboarding","skateboarding","cycling","archery","fishing","gymnastics","figure skating","rock climbing","sumo wrestling","taekwondo","fencing","water skiing","jet skiing","weight lifting","scuba diving","judo","wind surfing","kickboxing","sky diving","hang gliding","bungee jumping"];
  const fields = [
@@ -15,22 +21,22 @@ for (let i = 0; i < 1; i++) {
  
 
   let minuteMultiplierItem = {
-    minuteMultiplier:getFakeNumber(0, 100),
-     minutes :getFakeNumber(0, 100),
-     order:getFakeNumber(0, 100),
+    minuteMultiplier:helper.getFakeNumber(0, 100),
+     minutes :helper.getFakeNumber(0, 100),
+     order:helper.getFakeNumber(0, 100),
      type:'Name',
      zoneName:'Name',
   };
 
   const activeZoneMinutesItem = {
     minutesInHeartRateZones:[minuteMultiplierItem,minuteMultiplierItem,minuteMultiplierItem],
-    totalMinutes: getFakeNumber(0, 100),
+    totalMinutes: helper.getFakeNumber(0, 100),
   };
 
   
 
    const activityLevelItem = {
-     minutes :getFakeNumber(0, 100),
+     minutes :helper.getFakeNumber(0, 100),
      name :'sedentary',
     
   };
@@ -40,15 +46,15 @@ for (let i = 0; i < 1; i++) {
   let distanceItem = {
     
     activity:"text",
-    distance:getFakeNumber(0, 100)
+    distance:helper.getFakeNumber(0, 100)
     
   };
   let heartRateZone = {
     
-    caloriesOut :getFakeNumber(0, 100),
-    max :getFakeNumber(0, 100),
-    min :getFakeNumber(0, 100),
-    minutes :getFakeNumber(0, 100),
+    caloriesOut :helper.getFakeNumber(0, 100),
+    max :helper.getFakeNumber(0, 100),
+    min :helper.getFakeNumber(0, 100),
+    minutes :helper.getFakeNumber(0, 100),
     name : "text" 
     
   };
@@ -56,38 +62,38 @@ for (let i = 0; i < 1; i++) {
 
 
   let summary = {
-    activeScore :getFakeNumber(-1, 5),
-    activityCalories:getFakeNumber(0, 1000),
-    caloriesBMR:getFakeNumber(0, 1000),
-    caloriesOut:getFakeNumber(0, 1000),
+    activeScore :helper.getFakeNumber(-1, 5),
+    activityCalories:helper.getFakeNumber(0, 1000),
+    caloriesBMR:helper.getFakeNumber(0, 1000),
+    caloriesOut:helper.getFakeNumber(0, 1000),
     distances: [distanceItem,distanceItem,distanceItem],
-    elevation: getFakeNumber(0, 1000),
-    fairlyActiveMinutes:getFakeNumber(0, 1000),
-    floors:getFakeNumber(0, 50),
+    elevation: helper.getFakeNumber(0, 1000),
+    fairlyActiveMinutes:helper.getFakeNumber(0, 1000),
+    floors:helper.getFakeNumber(0, 50),
     heartRateZones:[  heartRateZone ,heartRateZone,heartRateZone],
 
 
 
     activeZoneMinutes: [ activeZoneMinutesItem,activeZoneMinutesItem,activeZoneMinutesItem,],
     activityLevel:[activityLevelItem,activityLevelItem,activityLevelItem,activityLevelItem,activityLevelItem],
-    activityName :activity[getFakeNumber(0, 30)],
-    activityTypeId :getFakeNumber(0, 100000),
-    averageHeartRate :getFakeNumber(0, 200),
-    calories :getFakeNumber(0, 1000),
+    activityName :activity[helper.getFakeNumber(0, 30)],
+    activityTypeId :helper.getFakeNumber(0, 100000),
+    averageHeartRate :helper.getFakeNumber(0, 200),
+    calories :helper.getFakeNumber(0, 1000),
     caloriesLink: 'http',
-    duration:getFakeNumber(0, 10000000),
-    elevationGain: getFakeNumber(0, 1000),
+    duration:helper.getFakeNumber(0, 10000000),
+    elevationGain: helper.getFakeNumber(0, 1000),
     hasActiveZoneMinutes:'true',
 
     distances: [distanceItem,distanceItem,distanceItem],
     heartRateLink:'http',
 
-    lightlyActiveMinutes: getFakeNumber(0, 1000),
-    marginalCalories: getFakeNumber(0, 1000),
-    restingHeartRate: getFakeNumber(0, 1000),
-    sedentaryMinutes: getFakeNumber(0, 1000),
-    steps: getFakeNumber(0, 10000),
-    veryActiveMinutes: getFakeNumber(0, 100),
+    lightlyActiveMinutes: helper.getFakeNumber(0, 1000),
+    marginalCalories: helper.getFakeNumber(0, 1000),
+    restingHeartRate: helper.getFakeNumber(0, 1000),
+    sedentaryMinutes: helper.getFakeNumber(0, 1000),
+    steps: helper.getFakeNumber(0, 10000),
+    veryActiveMinutes: helper.getFakeNumber(0, 100),
 
  
  
@@ -96,30 +102,6 @@ for (let i = 0; i < 1; i++) {
   array.push(summary)
 }
   
-  if (sync) getJSON(array);
-    else getCSV(array);
-
-
-  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
-  }
-
-  function getJSON(obj) {
-    let json = JSON.stringify(obj);
-    console.log(json);
-  }
-
-  
-  function getCSV(obj) {
-    let json = JSON.stringify(obj);
-    try {
-       const csvData = csvjson.toCSV(json, {
-        headers: fields,
-      });
-      const csv = parse(json, opts);
-      console.log(csvData);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
+  if (sync) helper.getJSON(array);
+    else helper.getCSV(array);
+ 

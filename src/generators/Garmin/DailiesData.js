@@ -1,5 +1,9 @@
-let csvjson = require("csvjson");
-let faker = require("faker");
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
+ let faker = require("faker");
 const { parse } = require("json2csv");
 
 let activity = [
@@ -53,7 +57,7 @@ const fields = [
   "summaryid","calendardate","activitytype","activekilocalories","bmrkilocalories","steps","distanceinmeters","durationinseconds","activetimeinseconds","starttimeinseconds","starttimeoffsetinseconds","moderateintensitydurationinseconds","vigorousintensitydurationinseconds","floorsclimbed","stepsgoal","intensitydurationgoalinseconds","floorsclimbedgoal","averagestresslevel","stressqualifier","minheartrateinbeatsperminute","maxheartrateinbeatsperminute","averageheartrateinbeatsperminute","restingheartrateinbeatsperminute","timeoffsetheartratesamples","maxstresslevel","stressdurationinseconds","reststressdurationinseconds","activitystressdurationinseconds","lowstressdurationinseconds","mediumstressdurationinseconds","highstressdurationinseconds","user","day","period",
 ];
 const opts = { fields };
-var sync = false;
+var sync = true;
 
 for (let i = 0; i < 1; i++) { 
   let date = faker.date.past();
@@ -61,90 +65,57 @@ for (let i = 0; i < 1; i++) {
   date_end.setHours(date.getHours() + 24);
 
   let deep = {
-    count: getFakeNumber(0, 100),
-    minutes: getFakeNumber(0, 100),
-    thirtyDayAvgMinutes: getFakeNumber(0, 100),
+    count: helper.getFakeNumber(0, 100),
+    minutes: helper.getFakeNumber(0, 100),
+    thirtyDayAvgMinutes: helper.getFakeNumber(0, 100),
   };
 
   let summary = {
-    summaryid: makeid(15),
+    summaryid: helper.makeid(15),
     calendardate: date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(),
-    activityName: activity[getFakeNumber(0, 30)],
-    activekilocalories: getFakeNumber(0, 1000),
-    bmrkilocalories: getFakeNumber(0, 120),
-    steps: getFakeNumber(0, 6000),
-    distanceinmeters:getFakeNumber(0, 10000),
-    durationinseconds: getFakeNumber(0, 10000),
-    activetimeinseconds: getFakeNumber(0, 10000),
-    starttimeinseconds: getFakeNumber(0, 10000),
-    starttimeoffsetinseconds: getFakeNumber(0, 1000),
-    moderateintensitydurationinseconds: getFakeNumber(0, 1000),
-    vigorousintensitydurationinseconds: getFakeNumber(0, 1000),
-    floorsclimbed:getFakeNumber(0, 20),
-    stepsgoal: getFakeNumber(0, 10000),
-    intensitydurationgoalinseconds: getFakeNumber(0, 10000),
-    floorsclimbedgoal:getFakeNumber(0, 20),
-    averagestresslevel: getFakeNumber(0, 20),
-    stressqualifier:getFakeNumber(0, 20),
-    minheartrateinbeatsperminute: getFakeNumber(0, 20),
-    maxheartrateinbeatsperminute: getFakeNumber(0, 20),
-    averageheartrateinbeatsperminute:getFakeNumber(0, 20),
-    restingheartrateinbeatsperminute: getFakeNumber(0, 20) + '{',
-    timeoffsetheartratesamples: getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20) +  ' . '  +  getFakeNumber(0, 2000) + ":" + getFakeNumber(0, 20),
+    activityName: activity[helper.getFakeNumber(0, 30)],
+    activekilocalories: helper.getFakeNumber(0, 1000),
+    bmrkilocalories: helper.getFakeNumber(0, 120),
+    steps: helper.getFakeNumber(0, 6000),
+    distanceinmeters:helper.getFakeNumber(0, 10000),
+    durationinseconds: helper.getFakeNumber(0, 10000),
+    activetimeinseconds: helper.getFakeNumber(0, 10000),
+    starttimeinseconds: helper.getFakeNumber(0, 10000),
+    starttimeoffsetinseconds: helper.getFakeNumber(0, 1000),
+    moderateintensitydurationinseconds: helper.getFakeNumber(0, 1000),
+    vigorousintensitydurationinseconds: helper.getFakeNumber(0, 1000),
+    floorsclimbed:helper.getFakeNumber(0, 20),
+    stepsgoal: helper.getFakeNumber(0, 10000),
+    intensitydurationgoalinseconds: helper.getFakeNumber(0, 10000),
+    floorsclimbedgoal:helper.getFakeNumber(0, 20),
+    averagestresslevel: helper.getFakeNumber(0, 20),
+    stressqualifier:helper.getFakeNumber(0, 20),
+    minheartrateinbeatsperminute: helper.getFakeNumber(0, 20),
+    maxheartrateinbeatsperminute: helper.getFakeNumber(0, 20),
+    averageheartrateinbeatsperminute:helper.getFakeNumber(0, 20),
+    restingheartrateinbeatsperminute: helper.getFakeNumber(0, 20) + '{',
+    timeoffsetheartratesamples: helper.getFakeNumber(0, 2000) + ":" + helper.getFakeNumber(0, 20) +  ' . '  +  helper.getFakeNumber(0, 2000) + ":" + helper.getFakeNumber(0, 20),
     ' ': "}",
-    maxstresslevel: getFakeNumber(0, 20),
-    stressdurationinseconds: getFakeNumber(0, 20),
-    reststressdurationinseconds: getFakeNumber(0, 20),
-    activitystressdurationinseconds: getFakeNumber(0, 20),
-    lowstressdurationinseconds:getFakeNumber(0, 20),
-    mediumstressdurationinseconds: getFakeNumber(0, 20),
-    highstressdurationinseconds: getFakeNumber(0, 20),
-    user: "id_"+makeid(20),
+    maxstresslevel: helper.getFakeNumber(0, 20),
+    stressdurationinseconds: helper.getFakeNumber(0, 20),
+    reststressdurationinseconds: helper.getFakeNumber(0, 20),
+    activitystressdurationinseconds: helper.getFakeNumber(0, 20),
+    lowstressdurationinseconds:helper.getFakeNumber(0, 20),
+    mediumstressdurationinseconds: helper.getFakeNumber(0, 20),
+    highstressdurationinseconds: helper.getFakeNumber(0, 20),
+    user: "id_"+helper.makeid(20),
     day: date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear(),
-    period: getFakeNumber(0, 20),
+    period: helper.getFakeNumber(0, 20),
   
 
   };
 
-  if (sync) getJSON(summary);
- else getCSV(summary);
+  if (sync) helper.getJSON(summary);
+ else helper.getCSV(summary);
 
 
-  function getFakeNumber(a, b) {
-    return faker.datatype.number({ min: a, max: b });
+   
+ 
   }
 
-  function getJSON(obj) {
-    let json = JSON.stringify(obj);
-    console.log(json);
-  }
-
-  function getCSV(obj) {
-    let json = JSON.stringify(obj);
-    try {
-       const csvData = csvjson.toCSV(json, {
-        headers: fields,
-      });
-      const csv = parse(json, opts);
-      console.log(csvData);
-    } catch (err) {
-      console.error(err);
-    }
-    
-
-
-  }
-
-  function makeid(length) {
-    var result           = '';
-    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789-';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * 
- charactersLength));
-   }
-   return result;
-}
-
-
-}
+ 

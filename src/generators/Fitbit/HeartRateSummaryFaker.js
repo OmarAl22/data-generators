@@ -1,3 +1,8 @@
+var path = require("path");
+var fileName = __dirname;
+var file = path.dirname(fileName); // reemove file name
+var file2 = path.dirname(file); // remove last dir from path
+const helper = require(file2+'/utils/helper.js');
 let csvjson = require("csvjson");
 let faker = require("faker");
 const { parse } = require("json2csv");
@@ -12,23 +17,23 @@ for (let i = 0; i < 1; i++) {
   date_end.setHours(date.getHours() + 24);
 
   let OUT_OF_ZONE = {
-    cals: getFakeNumber(0, 100),
-    min: getFakeNumber(0, 100),
+    cals: helper.getFakeNumber(0, 100),
+    min: helper.getFakeNumber(0, 100),
   };
 
   let FAT_BURN = {
-    cals: getFakeNumber(0, 100),
-    min: getFakeNumber(0, 100),
+    cals: helper.getFakeNumber(0, 100),
+    min: helper.getFakeNumber(0, 100),
   };
 
   let CARDIO = {
-    cals: getFakeNumber(0, 100),
-    min: getFakeNumber(0, 100),
+    cals: helper.getFakeNumber(0, 100),
+    min: helper.getFakeNumber(0, 100),
   };
 
   let PEAK = {
-    cals: getFakeNumber(0, 100),
-    min: getFakeNumber(0, 100),
+    cals: helper.getFakeNumber(0, 100),
+    min: helper.getFakeNumber(0, 100),
   };
 
   let summary = {
@@ -40,28 +45,9 @@ for (let i = 0; i < 1; i++) {
   array.push(summary);
 }
 
-if (sync) getJSON(array);
-else getCSV(array);
+if (sync) helper.getJSON(array);
+else helper.getCSV(array);
 
-function getFakeNumber(a, b) {
-  return faker.datatype.number({ min: a, max: b });
-}
+ 
 
-function getJSON(obj) {
-  let json = JSON.stringify(obj);
-  console.log(json);
-}
-
-
-function getCSV(obj) {
-  let json = JSON.stringify(obj);
-  try {
-     const csvData = csvjson.toCSV(json, {
-      headers: fields,
-    });
-    const csv = parse(json, opts);
-    console.log(csvData);
-  } catch (err) {
-    console.error(err);
-  }
-}
+ 
