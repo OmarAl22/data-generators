@@ -14,7 +14,7 @@ for (let i = 0; i < 1; i++) {
 
 
   let value1 = {
-    fieldName: "ecg_type",
+    fieldName: "threshold",
     integerValue: helper.getFakeNumber(0, 10),
   
   };
@@ -25,60 +25,50 @@ for (let i = 0; i < 1; i++) {
   };
 
   let value3 = {
-    fieldName: 'ecg_arrhythmia_typ',
+    fieldName: 'max_heart_rate',
     integerValue: helper.getFakeNumber(0, 10),
   
   };
 
   let value4 = {
-    fieldName: 'user_symptom',
+    fieldName: 'min_heart_rate',
     integerValue: helper.getFakeNumber(0, 10),
   
   };
 
-  let value5 = {
-    fieldName: 'ecg_algorithm_versio',
-    integerValue: "V1.0.0.39",
+
+
+  let value12 = {
+    fieldName: 'bpm',
+    integerValue:  helper.getFakeNumber(50, 100),
   
   };
-
-  let value6 = {
-    fieldName: 'ecg_type',
-    integerValue:  helper.getFakeNumber(0, 10),
   
-  };
-
-  let value7 = {
-    fieldName: 'voltage_datas',
-    integerValue: '[' + Array.from({length: 40}, () => Math.sqrt(helper.getFakeNumber(0,9))) +"]",
-  
-  };
-
-
+  let samplePoints = {
+    startTime:helper.getFakeNumber(0, 100000000000),
+    endTime:helper.getFakeNumber(0, 100000000000),
+     dataTypeName :"com.huawei.instantaneous.heart_rate",
+     value:[value12],
+ 
+      }
 
   let ecg_detail = {
 
   
      startTime:helper.getFakeNumber(0, 100000000000),
     endTime:helper.getFakeNumber(0, 100000000000),
-    dataTypeName:"com.huawei.continuous.ecg_detail",
-    dataCollectorId:"raw:com.huawei.continuous.ecg_detail:com.huawei.health:Huawei:006S:123456:300000000005047066",
-    value:[value6,value7],
-
-  
-  };
+    dataCollectorId:"raw:com.huawei.instantaneous.heart_rate:300013102:huawei:mp:1234567890",
+    samplePoints:[samplePoints],
+};
 
 
    
 
-  let pace = {
-    "Value":helper.getFakeNumber(0, 10000),
-  }
   
 
 
  let subData = {
-    "com.huawei.continuous.ecg_detail":ecg_detail,
+    "com.huawei.instantaneous.heart_rate":ecg_detail,
  }
  
   let activityRecord = {
@@ -86,9 +76,8 @@ for (let i = 0; i < 1; i++) {
    
     startTime:helper.getFakeNumber(0, 100000000000),
     endTime:helper.getFakeNumber(0, 100000000000),
-     dataTypeName :"com.huawei.continuous.ecg_record",
-    value: [value1, value2, value3, value4, value5],
-    id: helper.getFakeNumber(99999,999999999999)+"",
+     originalDataCollectorId:"com.huawei.health.record.tachycardia",
+    value: [value1, value2, value3, value4],
     subData: subData,
     
      
