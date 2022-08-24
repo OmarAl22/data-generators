@@ -14,7 +14,7 @@ var requested_timestamp =     (date.getMonth() + 1)+ "/" +  date.getDate()+ "/" 
 let record = {
  
     "Apple ID Number":helper.getFakeNumber(1111111111,99999999999),
-    "Apple ID": "**************@gmail.com",
+    "Apple ID": "a*************@gmail.com",
     "Create Date":requested_timestamp,
     "Prefix":prefix[helper.getFakeNumber(0,2)],
     "First Name":faker.name.firstName(),
