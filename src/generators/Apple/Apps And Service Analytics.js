@@ -6,8 +6,7 @@ var file2 = path.dirname(file); // remove last dir from path
 const helper = require(file2+'/utils/helper.js');
  
 var date =  faker.date.past();
-var Event = ["exit","enter","page","impressions","click","account","purchase","dialog","search","update"]; 
- var actions = ["back ","select ","navigate ","filter ","buy ","hint ","input ","retry ","open ","download ","cancel ","submit ","update ","focus ","share ","searchInsteadFor ","suggested"];
+  var actions = ["back ","select ","navigate ","filter ","buy ","hint ","input ","retry ","open ","download ","cancel ","submit ","update ","focus ","share ","searchInsteadFor ","suggested"];
  var app = ['App Store', 'iTunes Store'];
  var ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
 

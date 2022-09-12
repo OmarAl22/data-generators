@@ -10,8 +10,7 @@ var reason = ['MANUALLY_SELECTED_PLAYBACK_OF_A_DIFF_ITEM',
     'TRACK_SKIPPED_FORWARDS'
     ];
 var source = ['IPHONE','IPAD'];
- var requested_timestamp =    date.getFullYear()+ "-" +   (date.getMonth() + 1)+ "-" +  date.getDate()+ "T" +date.getHours()+":"+ date.getMinutes()+":"+ date.getSeconds()+ "";
- let record = {
+   let record = {
 
     "Country":faker.address.country(),
     "Track Identifier":helper.getFakeNumber(111111111,999999999),

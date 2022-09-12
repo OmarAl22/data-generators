@@ -8,9 +8,7 @@ const helper = require(file2+'/utils/helper.js');
 var date =  faker.date.past();
 var requested_timestamp =     (date.getMonth() + 1)+ "/" +  date.getDate()+ "/" + date.getFullYear()  ;
 
-var Event = ["exit","enter","page","impressions","click","account","purchase","dialog","search","update"]; 
- var actions = ["back ","select ","navigate ","filter ","buy ","hint ","input ","retry ","open ","download ","cancel ","submit ","update ","focus ","share ","searchInsteadFor ","suggested"];
- var plan = [' ', 'INTRO'];
+  var plan = [' ', 'INTRO'];
  var flag = ["TRUE","FALSE"]; 
 var network = ["ARCADE","ICLOUD", "BUNDLE"];
 

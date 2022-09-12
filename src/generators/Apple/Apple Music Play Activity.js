@@ -10,8 +10,7 @@ var reason = ['MANUALLY_SELECTED_PLAYBACK_OF_A_DIFF_ITEM',
     'TRACK_SKIPPED_FORWARDS','FAILED_TO_LOAD'
     ];
 var type = ['my_music:none / search','search'];
- var requested_timestamp =    date.getFullYear()+ "-" +   (date.getMonth() + 1)+ "-" +  date.getDate()+ "T" +date.getHours()+":"+ date.getMinutes()+":"+ date.getSeconds()+ "";
- var ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
+  var ip = (Math.floor(Math.random() * 255) + 1)+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255))+"."+(Math.floor(Math.random() * 255));
 
  let record = {
  
