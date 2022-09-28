@@ -11,7 +11,7 @@ let attachments = {
     "data":[
         {
            "life_event":{
-              "title":"Started new job at" + faker.address.city(),
+              "title":"Started new job at " + faker.address.city(),
               "start_date":{
                  "year":helper.getFakeNumber(2000,2023),
                  "month":helper.getFakeNumber(1,12),
