@@ -7,7 +7,7 @@ const helper = require(file2+'/utils/helper.js');
 
 console.log("customer_id,event_name,event_timestamp,device_platform_name,device_make,device_model,description");
 
-for(var i=0;i<size;i++)
+for(var i=0;i<10;i++)
     console.log(helper.getFakeNumber(1111111,999999) +", text," + helper.getFakeNumber(1111111,999999) + ",\t,Apple,\t,\t," );
 
 
