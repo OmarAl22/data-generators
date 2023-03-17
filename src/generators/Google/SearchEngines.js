@@ -28,19 +28,11 @@ let apps = {
  
 }
  
-
-
 let SearchEngine = {
  
     "Search Engines":Array.from({length: helper.getFakeNumber(1,7)}, () => apps),
-
-      
-}
- 
   
- 
-
- 
+}
 
 var json = JSON.stringify( SearchEngine );
 

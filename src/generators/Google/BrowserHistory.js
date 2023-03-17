@@ -17,11 +17,6 @@ let Browser_History = {
     "Browser History": Array.from({length: helper.getFakeNumber(2,7)}, () => notification),
 }
  
-  
- 
-
- 
-
 var json = JSON.stringify( Browser_History );
 
  console.log(json);
