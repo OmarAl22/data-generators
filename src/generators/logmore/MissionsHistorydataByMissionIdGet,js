@@ -1,0 +1,48 @@
+const faker = require('faker');
+
+const generateData = () => {
+  const sensors = [0, 4, 5, 3];
+  const data = [];
+  sensors.forEach((sensorId) => {
+    const sensorData = {
+      sensor_id: sensorId,
+      data: []
+    };
+
+    if (sensorId === 3) {
+      sensorData.data = [
+        [1567355520000, [faker.datatype.number(), faker.datatype.number(), faker.datatype.number(), faker.datatype.number()]],
+        [1567360680000, [faker.datatype.number(), faker.datatype.number(), faker.datatype.number(), faker.datatype.number()]]
+      ];
+    } else {
+      for (let i = 0; i < 4; i++) {
+        const timestamp = 1567332330000 + i * 900000;
+        const value = sensorId === 5 ? faker.datatype.number() : faker.datatype.number({ min: 0, max: 100 });
+        sensorData.data.push([timestamp, value]);
+      }
+      if (sensorId === 4) {
+        for (let i = 4; i < 9; i++) {
+          const timestamp = 1567332330000 + i * 900000;
+          const value = faker.datatype.number({ min: 0, max: 100 });
+          sensorData.data.push([timestamp, value]);
+        }
+      }
+    }
+    data.push(sensorData);
+  });
+
+  return data;
+};
+
+const generateJSON = () => {
+  return [
+    {
+      logger_id: faker.datatype.uuid(),
+      data: generateData()
+    }
+  ];
+};
+
+const json = JSON.stringify(generateJSON());
+
+console.log(json);
