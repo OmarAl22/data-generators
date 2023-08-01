@@ -14,12 +14,7 @@ let record = {
     "Date":requested_timestamp,
     "Link":"https://linkedin.com/",
     "Message":"Message text",
-    		
-
-
-    
-   
-
+ 
 }
 
  
