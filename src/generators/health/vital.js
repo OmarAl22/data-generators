@@ -10,7 +10,7 @@ const generateVitalSigns = (date) => {
     timestamp: date.toISOString() // Use provided date
   };
 
-  return vitalSigns;
+  return vitalSigns; 
 };
 
 const generateDataForDays = (days) => {
@@ -25,7 +25,7 @@ const generateDataForDays = (days) => {
   return records;
 };
 
-const vitalSignsData = generateDataForDays(10);
+const vitalSignsData = generateDataForDays(11);
 const json = JSON.stringify(vitalSignsData, null, 2);
 
 console.log(json);
